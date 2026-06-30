@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
+/*
+  Learncity design tokens.
+  Single light theme. Brand accent locked across the whole app:
+  primary #10b981 -> partner #50B347 used only for the brand gradient.
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f6f8f7;
+  --surface: #ffffff;
+  --surface-muted: #f1f5f3;
+  --foreground: #0c1512;
+  --muted-foreground: #5b6b6449;
+  --border: #e3e9e6;
+  --ring: #10b981;
+
+  --brand: #50B347;
+  --brand-strong: #50B347;
+  --brand-partner: #50B347;
+  --brand-soft: #50b34715;
+
+  --danger: #e5484d;
+  --danger-soft: #fdecec;
+  --warning: #b8860b;
+  --warning-soft: #fdf6e3;
+
+  --radius: 14px;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
   --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-partner: var(--brand-partner);
+  --color-brand-soft: var(--brand-soft);
+
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 4px);
+  --radius-sm: calc(var(--radius) - 8px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--brand-soft);
+  color: var(--brand-strong);
+}
+
+/* Subtle, brand-tinted focus ring used by interactive elements */
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);
+  border-color: var(--brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print: isolate the certificate when downloading / printing */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .certificate-print,
+  .certificate-print * {
+    visibility: visible;
+  }
+
+  .certificate-print {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+  }
 }

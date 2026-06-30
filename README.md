@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Learncity — Student Management System
 
-## Getting Started
+A premium, minimalist student management system for an academy. Sign in, enroll
+students, track their progress, and issue verified certificates of completion.
 
-First, run the development server:
+Built with **Next.js (App Router)**, **TypeScript**, and **Tailwind CSS v4**.
+Brand theme locked to emerald `#10b981` → `#50B347`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- **Login** — clean split-screen sign-in (mock client-side auth).
+- **Dashboard overview** — roster stats (totals, graduates, average GPA,
+  certificates) and recent enrollments.
+- **Students list** — search by name / ID / email / program and filter by status.
+- **Add / edit student** — validated form (personal details, program, status,
+  GPA, progress, notes).
+- **Student detail** — full record, academic snapshot, and quick actions.
+- **Certificate** — auto-generated for graduated students, with **Download PDF**
+  and **Print**.
+- **Delete** — confirmation dialog before removing a record.
+
+Data is stored in the browser (`localStorage`) and seeded with a sample roster on
+first run, so the app works fully offline with no backend.
+
+## Demo credentials
+
+```
+Email:    admin@learncity.io
+Password: learncity
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+(Pre-filled on the login screen.)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Getting started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Open http://localhost:3000.
 
-To learn more about Next.js, take a look at the following resources:
+## Notes
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- A certificate only becomes available once a student's status is set to
+  **Graduated**. Diego Hernández and Leah Goldberg are seeded as graduates.
+- To reset the roster to the seed data, clear the site's `localStorage`
+  (keys are prefixed `learncity.`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/
+    login/                         sign-in page
+    dashboard/
+      layout.tsx                   sidebar shell + auth guard
+      page.tsx                     overview
+      students/
+        page.tsx                   list + search + filter
+        new/                       add student
+        [id]/                      detail
+        [id]/edit/                 edit student
+        [id]/certificate/          certificate view + PDF download
+  components/                      UI primitives, brand, certificate, form
+  lib/                             types, auth store, student store, utils, seed
+```
