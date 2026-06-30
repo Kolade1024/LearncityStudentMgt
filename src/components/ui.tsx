@@ -74,7 +74,7 @@ export function Label({
 
 /* ----------------------------------- Input --------------------------------- */
 export const inputClass =
-  "focus-ring h-11 w-full rounded-[var(--radius-md)] border border-border bg-surface px-3.5 text-[15px] text-foreground placeholder:text-muted-foreground/70 transition-colors";
+  "focus-ring h-11 w-full rounded-[var(--radius-md)] border border-border bg-surface px-3.5 text-[15px] text-foreground placeholder:text-gray-500/70 transition-colors";
 
 export const Input = React.forwardRef<
   HTMLInputElement,
