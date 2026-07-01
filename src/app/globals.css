@@ -58,6 +58,25 @@
   border-color: var(--border);
 }
 
+/*
+  Tailwind v4 preflight no longer sets `cursor: pointer` on buttons.
+  Restore the expected pointer cursor for every interactive element so
+  anything clickable signals it clearly. Disabled controls keep the
+  default cursor.
+*/
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+a[href],
+label[for],
+summary {
+  cursor: pointer;
+}
+
+button:disabled,
+[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
